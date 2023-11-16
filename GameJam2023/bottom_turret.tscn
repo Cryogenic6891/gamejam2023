@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://ctjavv7x5e6vi"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_ij4ct"]
+[ext_resource type="Texture2D" uid="uid://bspomhdk8nbdl" path="res://assets/tanks_tankGreen_body3.png" id="2_kgbty"]
+[ext_resource type="Texture2D" uid="uid://cww10am0itlxh" path="res://assets/tanks_turret1.png" id="3_5farl"]
+[ext_resource type="Script" path="res://barrel.gd" id="4_8lbrm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_knonj"]
+radius = 21.2132
+
+[node name="bottomTurret" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_ij4ct")
+
+[node name="turret" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_kgbty")
+region_rect = Rect2(32, 64, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 3)
+shape = SubResource("CircleShape2D_knonj")
+
+[node name="barrel" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1, -18)
+texture = ExtResource("3_5farl")
+centered = false
+offset = Vector2(-5, -6)
+script = ExtResource("4_8lbrm")
+
+[node name="Marker2D" type="Marker2D" parent="barrel"]
+position = Vector2(36, 0)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

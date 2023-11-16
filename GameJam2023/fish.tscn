@@ -1,14 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://dd7hq2lwu0a3u"]
+[gd_scene load_steps=8 format=3 uid="uid://dd7hq2lwu0a3u"]
 
 [ext_resource type="Script" path="res://fish.gd" id="1_b7glh"]
 [ext_resource type="Texture2D" uid="uid://dvm0m3e4s6ajs" path="res://assets/__cartoon_fish_06_purple_swim.png" id="2_338ay"]
 
+[sub_resource type="Curve" id="Curve_syjji"]
+_data = [Vector2(0.0240964, 0.273684), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_6uxe4"]
+curve = SubResource("Curve_syjji")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a82fe"]
+emission_shape = 1
+emission_sphere_radius = 52.2
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+angular_velocity_min = -151.58
+angular_velocity_max = 272.84
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 11.53
+scale_max = 11.53
+scale_curve = SubResource("CurveTexture_6uxe4")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_0oma7"]
 radius = 34.2588
 
-[node name="fish" type="CharacterBody2D"]
-position = Vector2(335, 268.125)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f4nwl"]
+polygon = PackedVector2Array(-1, 37, 18, 51, 40, 50, 57, 38, 62, 14, 49, -9, 28, -16, -2, 0, -6, 26)
+
+[node name="fish" type="CharacterBody2D" groups=["fish"]]
 script = ExtResource("1_b7glh")
+
+[node name="sparkle" type="GPUParticles2D" parent="."]
+z_index = 3
+z_as_relative = false
+position = Vector2(25, 19)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_a82fe")
 
 [node name="fish" type="Sprite2D" parent="."]
 position = Vector2(27, 18.875)
@@ -20,7 +49,6 @@ region_rect = Rect2(10, 11, 488, 303)
 
 [node name="dirtlayer" type="Sprite2D" parent="."]
 modulate = Color(0.164706, 0.203922, 0.117647, 1)
-z_index = 2
 position = Vector2(27, 18.875)
 scale = Vector2(0.253074, 0.228342)
 texture = ExtResource("2_338ay")
@@ -31,3 +59,6 @@ region_rect = Rect2(10, 11, 488, 303)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(27.4501, 18.5599)
 shape = SubResource("CircleShape2D_0oma7")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_f4nwl")

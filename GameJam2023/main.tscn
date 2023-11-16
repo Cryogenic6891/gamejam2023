@@ -1,35 +1,31 @@
 [gd_scene load_steps=9 format=3 uid="uid://drvfhvuv4oovd"]
 
+[ext_resource type="Script" path="res://main.gd" id="1_6qtrp"]
+[ext_resource type="Script" path="res://Spawner.gd" id="1_h4oga"]
 [ext_resource type="Texture2D" uid="uid://bw3wyjdm5107c" path="res://assets/bg.png" id="1_khdix"]
-[ext_resource type="Texture2D" uid="uid://bspomhdk8nbdl" path="res://assets/tanks_tankGreen_body3.png" id="2_qgo0k"]
-[ext_resource type="Script" path="res://player.gd" id="2_thkvq"]
-[ext_resource type="Texture2D" uid="uid://cww10am0itlxh" path="res://assets/tanks_turret1.png" id="4_ljfbd"]
-[ext_resource type="Script" path="res://barrel.gd" id="5_imjw7"]
-[ext_resource type="PackedScene" uid="uid://dd7hq2lwu0a3u" path="res://fish.tscn" id="6_270n3"]
+[ext_resource type="Script" path="res://ui.gd" id="2_1xrke"]
+[ext_resource type="PackedScene" uid="uid://b7o4wtcbolxf6" path="res://rail.tscn" id="3_78dbm"]
+[ext_resource type="PackedScene" uid="uid://ctjavv7x5e6vi" path="res://bottom_turret.tscn" id="4_jutxs"]
+[ext_resource type="PackedScene" uid="uid://cekcjwgwfpb57" path="res://top_turret.tscn" id="5_giaak"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_enitr"]
-size = Vector2(20, 43)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_knonj"]
-radius = 21.2132
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5c0d"]
+size = Vector2(104, 664)
 
 [node name="Main" type="Node2D"]
-
-[node name="background" type="Sprite2D" parent="."]
-z_index = -1
-position = Vector2(573.5, 317.5)
-scale = Vector2(0.603646, 0.599074)
-texture = ExtResource("1_khdix")
+script = ExtResource("1_6qtrp")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_1xrke")
 
-[node name="Upper Panel" type="Panel" parent="CanvasLayer"]
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 123.0
-grow_horizontal = 2
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+offset_right = 122.0
+offset_bottom = 165.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Upper Panel"]
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,87 +34,192 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/Upper Panel/HBoxContainer"]
-layout_mode = 2
-text = "Purchase
-Power Up"
-
-[node name="Button2" type="Button" parent="CanvasLayer/Upper Panel/HBoxContainer"]
-layout_mode = 2
-text = "Purchase
-Power Up"
-
-[node name="Button3" type="Button" parent="CanvasLayer/Upper Panel/HBoxContainer"]
-layout_mode = 2
-text = "Purchase
-Power Up"
-
-[node name="Button4" type="Button" parent="CanvasLayer/Upper Panel/HBoxContainer"]
-layout_mode = 2
-text = "Purchase
-Power Up"
-
-[node name="Panel" type="Panel" parent="CanvasLayer/Upper Panel/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="CanvasLayer/Upper Panel/HBoxContainer/Panel"]
+[node name="size" type="Button" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Size"
+
+[node name="size cost" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "50"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="velocity" type="Button" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Velocity"
+
+[node name="velocity cost" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "50"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="rate" type="Button" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "Rate"
+
+[node name="rate cost" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "50"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="power" type="Button" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "Power"
+
+[node name="power cost" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "50"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Total"
+
+[node name="total" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "0"
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -118.0
+offset_right = 139.0
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelContainer2"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer2/Panel"]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -4.0
-offset_right = 8.0
-offset_bottom = 4.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
-text = "+"
+alignment = 1
 
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(153, 605, 1003, 603)
-default_color = Color(0.592157, 0.592157, 0.592157, 1)
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer2/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
 
-[node name="Area2D" type="StaticBody2D" parent="Line2D"]
-position = Vector2(145, 606)
-collision_layer = 3
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer2/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Oil Max"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/Area2D"]
-position = Vector2(0, -2.5)
-shape = SubResource("RectangleShape2D_enitr")
+[node name="dirt max" type="Label" parent="CanvasLayer/PanelContainer2/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "100"
 
-[node name="Area2D2" type="StaticBody2D" parent="Line2D"]
-position = Vector2(1009, 600)
-collision_layer = 3
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer2/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Line2D/Area2D2"]
-shape = SubResource("RectangleShape2D_enitr")
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer2/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Oil Current"
 
-[node name="bottomTurret" type="CharacterBody2D" parent="."]
-position = Vector2(421, 589)
-motion_mode = 1
-script = ExtResource("2_thkvq")
+[node name="dirt current" type="Label" parent="CanvasLayer/PanelContainer2/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "100"
 
-[node name="turret" type="Sprite2D" parent="bottomTurret"]
-z_index = 1
-texture = ExtResource("2_qgo0k")
-region_rect = Rect2(32, 64, 32, 32)
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -114.0
+offset_bottom = 115.0
+grow_horizontal = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bottomTurret"]
-position = Vector2(-1, 3)
-shape = SubResource("CircleShape2D_knonj")
+[node name="Panel" type="Panel" parent="CanvasLayer/PanelContainer3"]
+layout_mode = 2
 
-[node name="barrel" type="Sprite2D" parent="bottomTurret"]
-z_index = -1
-position = Vector2(1, -18)
-texture = ExtResource("4_ljfbd")
-centered = false
-offset = Vector2(-5, -6)
-script = ExtResource("5_imjw7")
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PanelContainer3/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
 
-[node name="Marker2D" type="Marker2D" parent="bottomTurret/barrel"]
-position = Vector2(36, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer3/Panel/VBoxContainer"]
+layout_mode = 2
+alignment = 1
 
-[node name="Timer" type="Timer" parent="bottomTurret"]
+[node name="Label" type="Label" parent="CanvasLayer/PanelContainer3/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Combo x"
+
+[node name="combo" type="Label" parent="CanvasLayer/PanelContainer3/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "100"
+
+[node name="Timer" type="Timer" parent="CanvasLayer"]
+wait_time = 0.5
 one_shot = true
 
-[node name="fish" parent="." instance=ExtResource("6_270n3")]
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource("1_h4oga")
 
-[connection signal="timeout" from="bottomTurret/Timer" to="bottomTurret" method="_on_timer_timeout"]
+[node name="spawn" type="Marker2D" parent="Spawner" groups=["spawn"]]
+position = Vector2(-166, 139)
+
+[node name="spawn2" type="Marker2D" parent="Spawner" groups=["spawn"]]
+position = Vector2(-98, 225)
+
+[node name="spawn3" type="Marker2D" parent="Spawner" groups=["spawn"]]
+position = Vector2(-157, 291)
+
+[node name="spawn4" type="Marker2D" parent="Spawner" groups=["spawn"]]
+position = Vector2(-95, 350)
+
+[node name="spawn5" type="Marker2D" parent="Spawner" groups=["spawn"]]
+position = Vector2(-148, 414)
+
+[node name="spawn6" type="Marker2D" parent="Spawner" groups=["spawn"]]
+position = Vector2(-93, 491)
+
+[node name="Timer" type="Timer" parent="Spawner"]
+one_shot = true
+
+[node name="despawner" type="Area2D" parent="Spawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner/despawner"]
+position = Vector2(1270, 327)
+shape = SubResource("RectangleShape2D_r5c0d")
+
+[node name="background" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(573.5, 317.5)
+scale = Vector2(0.603646, 0.599074)
+texture = ExtResource("1_khdix")
+
+[node name="rail" parent="." instance=ExtResource("3_78dbm")]
+
+[node name="rail2" parent="." instance=ExtResource("3_78dbm")]
+position = Vector2(8, -561)
+
+[node name="bottomTurret" parent="." instance=ExtResource("4_jutxs")]
+position = Vector2(578, 588)
+
+[node name="topTurret" parent="." instance=ExtResource("5_giaak")]
+position = Vector2(587, 58)
+
+[connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/size" to="CanvasLayer" method="_on_size_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/velocity" to="CanvasLayer" method="_on_velocity_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer4/rate" to="CanvasLayer" method="_on_rate_pressed"]
+[connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer5/power" to="CanvasLayer" method="_on_power_pressed"]
+[connection signal="timeout" from="CanvasLayer/Timer" to="CanvasLayer" method="_on_timer_timeout"]
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Spawner/despawner" to="Spawner" method="_on_despawner_body_entered"]
