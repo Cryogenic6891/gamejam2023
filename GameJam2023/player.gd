@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 var water_jet = preload("res://water_jet.tscn")
 @onready var cooldown_timer = $Timer
-var fire_rate = 0.5
 var jet_speed = 2
 var shoot_cooldown = false
 
@@ -18,8 +17,12 @@ func _physics_process(delta):
 		fire_jet()
 
 func get_input():
-	input.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
-	return input.normalized()
+	if self.name == "bottomTurret":
+		input.x = int(Input.is_action_pressed("right")) - int(Input.is_action_pressed("left"))
+		return input.normalized()
+	if self.name == "topTurret":
+		input.x = int(Input.is_action_pressed("left")) - int(Input.is_action_pressed("right"))
+		return input.normalized()
 
 func fire_jet():
 	var shoot_jet = water_jet.instantiate()
@@ -30,7 +33,7 @@ func fire_jet():
 	start_shoot_cooldown()
 
 func start_shoot_cooldown():
-	cooldown_timer.start(fire_rate)
+	cooldown_timer.start(Main.ball_rate)
 
 func player_movement(delta):
 	input = get_input()
@@ -44,6 +47,8 @@ func player_movement(delta):
 		velocity = velocity.limit_length(max_speed)
 	move_and_slide()
 
+func hit(_x):
+	pass
 
 func _on_timer_timeout():
 	shoot_cooldown = false

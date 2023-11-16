@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7o4wtcbolxf6"]
+
+[ext_resource type="Script" path="res://bumper.gd" id="1_b1h5e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_enitr"]
+size = Vector2(20, 43)
+
+[node name="rail" type="Line2D"]
+points = PackedVector2Array(153, 605, 1003, 603)
+default_color = Color(0.592157, 0.592157, 0.592157, 1)
+
+[node name="Area2D" type="StaticBody2D" parent="."]
+position = Vector2(145, 606)
+collision_layer = 3
+script = ExtResource("1_b1h5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_enitr")
+
+[node name="Area2D2" type="StaticBody2D" parent="."]
+position = Vector2(1009, 600)
+collision_layer = 3
+script = ExtResource("1_b1h5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_enitr")

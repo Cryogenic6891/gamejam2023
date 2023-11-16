@@ -3,12 +3,14 @@ extends CharacterBody2D
 var launched = false
 var max_speed = 500
 var mass = 2
-var clean_value  = 25
 
 var splash = preload("res://splash.tscn")
+var fadeout_timer = 5
+@onready var timer = $Timer
 
 func _ready():
-	pass 
+	timer.start(fadeout_timer)
+	self.scale = self.scale * Main.ball_size 
 
 
 func _process(delta):
@@ -20,12 +22,12 @@ func _process(delta):
 		position += velocity*delta
 		
 		rotation = velocity.angle()
-		velocity = velocity.limit_length(max_speed)
+		velocity = velocity.limit_length(max_speed * Main.ball_velocity)
 	
 
 func launch(initial_velocity : Vector2, speed):
 	launched = true
-	velocity = initial_velocity * speed
+	velocity = initial_velocity * speed * Main.ball_velocity
 	
 
 
@@ -33,6 +35,10 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 	var add_splash = splash.instantiate()
 	get_parent().add_child(add_splash)
 	add_splash.global_position = self.global_position
-	body.hit(clean_value)
+	body.hit(Main.ball_power)
 	queue_free()
 
+
+
+func _on_timer_timeout():
+	queue_free()
