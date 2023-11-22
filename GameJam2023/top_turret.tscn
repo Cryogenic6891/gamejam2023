@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_knonj"]
 radius = 21.2132
 
-[node name="topTurret" type="CharacterBody2D"]
+[node name="topTurret" type="CharacterBody2D" groups=["player"]]
 motion_mode = 1
 script = ExtResource("1_2qjrh")
 
@@ -36,4 +36,7 @@ position = Vector2(36, 0)
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="power_timer" type="Timer" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="power_timer" to="." method="_on_power_timer_timeout"]

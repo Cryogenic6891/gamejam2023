@@ -37,6 +37,10 @@ alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 
+[node name="hotkey" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "1"
+
 [node name="size" type="Button" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Size"
@@ -47,6 +51,10 @@ text = "50"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
+
+[node name="hotkey" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "2"
 
 [node name="velocity" type="Button" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
@@ -59,6 +67,10 @@ text = "50"
 [node name="HBoxContainer4" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
 
+[node name="hotkey" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+text = "3"
+
 [node name="rate" type="Button" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 text = "Rate"
@@ -69,6 +81,10 @@ text = "50"
 
 [node name="HBoxContainer5" type="HBoxContainer" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer"]
 layout_mode = 2
+
+[node name="hotkey" type="Label" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+text = "4"
 
 [node name="power" type="Button" parent="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
@@ -212,9 +228,13 @@ position = Vector2(8, -561)
 
 [node name="bottomTurret" parent="." instance=ExtResource("4_jutxs")]
 position = Vector2(578, 588)
+collision_layer = 2
+collision_mask = 2
 
 [node name="topTurret" parent="." instance=ExtResource("5_giaak")]
 position = Vector2(587, 58)
+collision_layer = 2
+collision_mask = 2
 
 [connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/size" to="CanvasLayer" method="_on_size_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/velocity" to="CanvasLayer" method="_on_velocity_pressed"]
