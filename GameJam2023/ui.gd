@@ -14,6 +14,11 @@ extends CanvasLayer
 @onready var velocity_button = $PanelContainer/Panel/VBoxContainer/HBoxContainer2/velocity
 @onready var rate_button = $PanelContainer/Panel/VBoxContainer/HBoxContainer4/rate
 @onready var power_button = $PanelContainer/Panel/VBoxContainer/HBoxContainer5/power
+
+@onready var hotkey_1 = $PanelContainer/Panel/VBoxContainer/HBoxContainer/hotkey
+@onready var hotkey_2 = $PanelContainer/Panel/VBoxContainer/HBoxContainer2/hotkey
+@onready var hotkey_3 = $PanelContainer/Panel/VBoxContainer/HBoxContainer4/hotkey
+@onready var hotkey_4 = $PanelContainer/Panel/VBoxContainer/HBoxContainer5/hotkey
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	dirt_max.text = str(Main.dirt_max)
@@ -28,10 +33,18 @@ func _process(delta):
 	power.text = str(Main.power_cost)
 	combo.text = str(Main.combo)
 	dirt_current.text = str(Main.dirt_current)
+	if Input.is_action_just_pressed("hotkey_1"):
+		_on_size_pressed()
+	if Input.is_action_just_pressed("hotkey_2"):
+		_on_velocity_pressed()
+	if Input.is_action_just_pressed("hotkey_3"):
+		_on_rate_pressed()
+	if Input.is_action_just_pressed("hotkey_4"):
+		_on_power_pressed()
 
 
 func _on_size_pressed():
-	if Main.total_points > Main.size_cost:
+	if Main.total_points >= Main.size_cost:
 		Main.ball_size += 0.75
 		Main.total_points -= Main.size_cost
 		Main.size_cost = Main.size_cost * 2
@@ -41,7 +54,7 @@ func _on_size_pressed():
 
 
 func _on_velocity_pressed():
-	if Main.total_points > Main.velocity_cost:
+	if Main.total_points >= Main.velocity_cost:
 		Main.ball_velocity += 0.1
 		Main.total_points -= Main.velocity_cost
 		Main.velocity_cost = Main.velocity_cost *2
@@ -51,7 +64,7 @@ func _on_velocity_pressed():
 
 
 func _on_rate_pressed():
-	if Main.total_points > Main.rate_cost:
+	if Main.total_points >= Main.rate_cost:
 		Main.ball_rate -= 0.1
 		Main.total_points -= Main.rate_cost
 		Main.rate_cost = Main.rate_cost *2
@@ -61,7 +74,7 @@ func _on_rate_pressed():
 
 
 func _on_power_pressed():
-	if Main.total_points > Main.power_cost:
+	if Main.total_points >= Main.power_cost:
 		Main.ball_power += 7
 		Main.total_points -= Main.power_cost
 		Main.power_cost = Main.power_cost *2

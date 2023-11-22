@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://rx2typ5a56gf"]
+
+[ext_resource type="Texture2D" uid="uid://dbusaveucnagi" path="res://assets/1.png" id="1_g7ftt"]
+[ext_resource type="Script" path="res://powerup.gd" id="1_kjoup"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4fscv"]
+radius = 20.3961
+
+[node name="powerup" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_kjoup")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_g7ftt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4fscv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

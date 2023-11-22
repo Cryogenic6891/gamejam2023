@@ -2,6 +2,7 @@ extends Node2D
 
 var total_points = 0
 var combo = 1
+var combo_max = 5
 var dirt_max = 1200
 var dirt_current = 0
 
@@ -26,7 +27,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if combo > 5:
+		combo = 5
 
 func update_points(points):
 	total_points += points

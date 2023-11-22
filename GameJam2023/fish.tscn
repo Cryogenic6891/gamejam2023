@@ -1,14 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dd7hq2lwu0a3u"]
+[gd_scene load_steps=10 format=3 uid="uid://dd7hq2lwu0a3u"]
 
 [ext_resource type="Script" path="res://fish.gd" id="1_b7glh"]
 [ext_resource type="Texture2D" uid="uid://dvm0m3e4s6ajs" path="res://assets/__cartoon_fish_06_purple_swim.png" id="2_338ay"]
-
-[sub_resource type="Curve" id="Curve_syjji"]
-_data = [Vector2(0.0240964, 0.273684), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="CurveTexture" id="CurveTexture_6uxe4"]
-curve = SubResource("Curve_syjji")
+[ext_resource type="Texture2D" uid="uid://mg4512lr4cqj" path="res://assets/star_01.png" id="2_wg15d"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_a82fe"]
 emission_shape = 1
@@ -19,9 +13,8 @@ angular_velocity_min = -151.58
 angular_velocity_max = 272.84
 orbit_velocity_min = 0.0
 orbit_velocity_max = 0.0
-scale_min = 11.53
-scale_max = 11.53
-scale_curve = SubResource("CurveTexture_6uxe4")
+scale_min = 0.01
+scale_max = 0.05
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_0oma7"]
 radius = 34.2588
@@ -29,7 +22,46 @@ radius = 34.2588
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f4nwl"]
 polygon = PackedVector2Array(-1, 37, 18, 51, 40, 50, 57, 38, 62, 14, 49, -9, 28, -16, -2, 0, -6, 26)
 
+[sub_resource type="Animation" id="Animation_ktfyp"]
+resource_name = "swim"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(10, 11, 488, 303), Rect2(509, 9, 468, 309), Rect2(1009, 7, 447, 301), Rect2(1510, 5, 425, 299), Rect2(13, 334, 447, 301), Rect2(509, 336, 468, 309), Rect2(1006, 338, 487, 303), Rect2(1505, 336, 469, 309), Rect2(13, 661, 448, 302), Rect2(514, 659, 427, 299), Rect2(1010, 661, 444, 300), Rect2(1505, 662, 466, 310)]
+}
+
+[sub_resource type="Animation" id="Animation_nb61x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(10, 11, 488, 303)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w3pxr"]
+_data = {
+"RESET": SubResource("Animation_nb61x"),
+"swim": SubResource("Animation_ktfyp")
+}
+
 [node name="fish" type="CharacterBody2D" groups=["fish"]]
+collision_mask = 0
 script = ExtResource("1_b7glh")
 
 [node name="sparkle" type="GPUParticles2D" parent="."]
@@ -38,6 +70,7 @@ z_as_relative = false
 position = Vector2(25, 19)
 emitting = false
 process_material = SubResource("ParticleProcessMaterial_a82fe")
+texture = ExtResource("2_wg15d")
 
 [node name="fish" type="Sprite2D" parent="."]
 position = Vector2(27, 18.875)
@@ -62,3 +95,15 @@ shape = SubResource("CircleShape2D_0oma7")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 occluder = SubResource("OccluderPolygon2D_f4nwl")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../fish")
+libraries = {
+"": SubResource("AnimationLibrary_w3pxr")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+root_node = NodePath("../dirtlayer")
+libraries = {
+"": SubResource("AnimationLibrary_w3pxr")
+}
