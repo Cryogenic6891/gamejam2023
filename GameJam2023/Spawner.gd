@@ -5,6 +5,10 @@ var pop_up = preload("res://point_pop_up.tscn")
 var spawn_points = []
 var spawn_rate = 4
 var spawn_ok = true
+var level_spawner = true
+var spawn_color = ["purple", "red", "blue"]
+
+signal spawn_counter
 
 @onready var timer = $Timer
 # Called when the node enters the scene tree for the first time.
@@ -16,19 +20,20 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if spawn_ok == true:
+	if spawn_ok == true and level_spawner == true:
 		spawn()
 
-func spawn():
+func spawn(fish_color = spawn_color):
 	var spawn_fish = fish.instantiate()
 	add_child(spawn_fish)
 	spawn_fish.position = spawn_points.pick_random().position
+	spawn_fish.spawn(fish_color)
+	spawn_counter.emit()
 	spawn_ok = false
 	timer.start(spawn_rate)
 
 func _on_timer_timeout():
 	spawn_ok = true
-
 
 func _on_despawner_body_entered(body):
 	if body.is_in_group("fish"):

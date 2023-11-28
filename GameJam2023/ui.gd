@@ -44,43 +44,47 @@ func _process(delta):
 
 
 func _on_size_pressed():
-	if Main.total_points >= Main.size_cost:
-		Main.ball_size += 0.75
-		Main.total_points -= Main.size_cost
-		Main.size_cost = Main.size_cost * 2
-		if Main.ball_size >= Main.ball_size_max:
-			size_button.disabled = true
-			Main.size_cost = "Max"
+	if Main.size_cost is int:
+		if Main.total_points >= Main.size_cost:
+			Main.ball_size += 0.75
+			Main.total_points -= Main.size_cost
+			Main.size_cost = Main.size_cost * 2
+			if Main.ball_size >= Main.ball_size_max:
+				size_button.disabled = true
+				Main.size_cost = "Max"
 
 
 func _on_velocity_pressed():
-	if Main.total_points >= Main.velocity_cost:
-		Main.ball_velocity += 0.1
-		Main.total_points -= Main.velocity_cost
-		Main.velocity_cost = Main.velocity_cost *2
-		if Main.ball_velocity >= Main.ball_velocity_max:
-			velocity_button.disabled = true
-			Main.velocity_cost = "Max"
+	if Main.velocity_cost is int:
+		if Main.total_points >= Main.velocity_cost:
+			Main.ball_velocity += 0.1
+			Main.total_points -= Main.velocity_cost
+			Main.velocity_cost = Main.velocity_cost *2
+			if Main.ball_velocity >= Main.ball_velocity_max:
+				velocity_button.disabled = true
+				Main.velocity_cost = "Max"
 
 
 func _on_rate_pressed():
-	if Main.total_points >= Main.rate_cost:
-		Main.ball_rate -= 0.1
-		Main.total_points -= Main.rate_cost
-		Main.rate_cost = Main.rate_cost *2
-		if Main.ball_rate <= Main.ball_rate_max:
-			rate_button.disabled = true
-			Main.rate_cost = "Max"
+	if Main.rate_cost is int:
+		if Main.total_points >= Main.rate_cost:
+			Main.ball_rate -= 0.1
+			Main.total_points -= Main.rate_cost
+			Main.rate_cost = Main.rate_cost *2
+			if Main.ball_rate <= Main.ball_rate_max:
+				rate_button.disabled = true
+				Main.rate_cost = "Max"
 
 
 func _on_power_pressed():
-	if Main.total_points >= Main.power_cost:
-		Main.ball_power += 7
-		Main.total_points -= Main.power_cost
-		Main.power_cost = Main.power_cost *2
-		if Main.ball_power >= Main.ball_power_max:
-			power_button.disabled = true
-			Main.power_cost = "Max"
+	if Main.power_cost is int:
+		if Main.total_points >= Main.power_cost:
+			Main.ball_power += 7
+			Main.total_points -= Main.power_cost
+			Main.power_cost = Main.power_cost *2
+			if Main.ball_power >= Main.ball_power_max:
+				power_button.disabled = true
+				Main.power_cost = "Max"
 
 
 func _on_timer_timeout():

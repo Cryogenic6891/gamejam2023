@@ -29,6 +29,8 @@ func _ready():
 func _process(delta):
 	if combo > 5:
 		combo = 5
+	if dirt_current >= dirt_max:
+		get_tree().reload_current_scene()
 
 func update_points(points):
 	total_points += points

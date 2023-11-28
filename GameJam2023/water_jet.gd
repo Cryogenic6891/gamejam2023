@@ -44,7 +44,10 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 		var add_splash = splash.instantiate()
 		get_parent().add_child(add_splash)
 		add_splash.global_position = self.global_position
-		body.hit(Main.ball_power)
+		if self.is_in_group("oil"):
+			body.hit(-Main.ball_power)
+		else:
+			body.hit(Main.ball_power)
 		if ricochet == true:
 			var shoot_jet = water_jet.instantiate()
 			add_splash.call_deferred("add_child", shoot_jet)
@@ -69,3 +72,5 @@ func _on_timer_2_timeout():
 	elif result == "slow_down":
 		velocity = -velocity
 
+func hit(_x):
+	pass

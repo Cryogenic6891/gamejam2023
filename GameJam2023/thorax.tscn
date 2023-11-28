@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://wiohcsx30o1u"]
+
+[ext_resource type="Script" path="res://wormsegment.gd" id="1_ripr1"]
+[ext_resource type="Texture2D" uid="uid://c0qa1vhduacvd" path="res://lava_type_02/thorax.png" id="2_7v2px"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4362e"]
+radius = 34.1321
+
+[node name="Thorax" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_ripr1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_7v2px")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4362e")

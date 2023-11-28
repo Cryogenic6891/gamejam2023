@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://drvfhvuv4oovd"]
+[gd_scene load_steps=11 format=3 uid="uid://drvfhvuv4oovd"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_6qtrp"]
 [ext_resource type="Script" path="res://Spawner.gd" id="1_h4oga"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://b7o4wtcbolxf6" path="res://rail.tscn" id="3_78dbm"]
 [ext_resource type="PackedScene" uid="uid://ctjavv7x5e6vi" path="res://bottom_turret.tscn" id="4_jutxs"]
 [ext_resource type="PackedScene" uid="uid://cekcjwgwfpb57" path="res://top_turret.tscn" id="5_giaak"]
+[ext_resource type="Script" path="res://Level Manager.gd" id="8_an7t7"]
+[ext_resource type="PackedScene" uid="uid://dx2sleqyebbv0" path="res://wormbosspath.tscn" id="11_jwl51"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5c0d"]
 size = Vector2(104, 664)
@@ -185,36 +187,6 @@ text = "100"
 wait_time = 0.5
 one_shot = true
 
-[node name="Spawner" type="Node2D" parent="."]
-script = ExtResource("1_h4oga")
-
-[node name="spawn" type="Marker2D" parent="Spawner" groups=["spawn"]]
-position = Vector2(-166, 139)
-
-[node name="spawn2" type="Marker2D" parent="Spawner" groups=["spawn"]]
-position = Vector2(-98, 225)
-
-[node name="spawn3" type="Marker2D" parent="Spawner" groups=["spawn"]]
-position = Vector2(-157, 291)
-
-[node name="spawn4" type="Marker2D" parent="Spawner" groups=["spawn"]]
-position = Vector2(-95, 350)
-
-[node name="spawn5" type="Marker2D" parent="Spawner" groups=["spawn"]]
-position = Vector2(-148, 414)
-
-[node name="spawn6" type="Marker2D" parent="Spawner" groups=["spawn"]]
-position = Vector2(-93, 491)
-
-[node name="Timer" type="Timer" parent="Spawner"]
-one_shot = true
-
-[node name="despawner" type="Area2D" parent="Spawner"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Spawner/despawner"]
-position = Vector2(1270, 327)
-shape = SubResource("RectangleShape2D_r5c0d")
-
 [node name="background" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(573.5, 317.5)
@@ -236,10 +208,47 @@ position = Vector2(587, 58)
 collision_layer = 2
 collision_mask = 2
 
+[node name="Level Manager" type="Node2D" parent="."]
+script = ExtResource("8_an7t7")
+
+[node name="Spawner" type="Node2D" parent="Level Manager"]
+script = ExtResource("1_h4oga")
+
+[node name="spawn" type="Marker2D" parent="Level Manager/Spawner" groups=["spawn"]]
+position = Vector2(-166, 139)
+
+[node name="spawn2" type="Marker2D" parent="Level Manager/Spawner" groups=["spawn"]]
+position = Vector2(-98, 225)
+
+[node name="spawn3" type="Marker2D" parent="Level Manager/Spawner" groups=["spawn"]]
+position = Vector2(-157, 291)
+
+[node name="spawn4" type="Marker2D" parent="Level Manager/Spawner" groups=["spawn"]]
+position = Vector2(-95, 350)
+
+[node name="spawn5" type="Marker2D" parent="Level Manager/Spawner" groups=["spawn"]]
+position = Vector2(-148, 414)
+
+[node name="spawn6" type="Marker2D" parent="Level Manager/Spawner" groups=["spawn"]]
+position = Vector2(-93, 491)
+
+[node name="Timer" type="Timer" parent="Level Manager/Spawner"]
+one_shot = true
+
+[node name="despawner" type="Area2D" parent="Level Manager/Spawner"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level Manager/Spawner/despawner"]
+position = Vector2(1270, 327)
+shape = SubResource("RectangleShape2D_r5c0d")
+
+[node name="Path2D" parent="." groups=["path"] instance=ExtResource("11_jwl51")]
+position = Vector2(-340.11, 172.908)
+
 [connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer/size" to="CanvasLayer" method="_on_size_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer2/velocity" to="CanvasLayer" method="_on_velocity_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer4/rate" to="CanvasLayer" method="_on_rate_pressed"]
 [connection signal="pressed" from="CanvasLayer/PanelContainer/Panel/VBoxContainer/HBoxContainer5/power" to="CanvasLayer" method="_on_power_pressed"]
 [connection signal="timeout" from="CanvasLayer/Timer" to="CanvasLayer" method="_on_timer_timeout"]
-[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
-[connection signal="body_entered" from="Spawner/despawner" to="Spawner" method="_on_despawner_body_entered"]
+[connection signal="spawn_counter" from="Level Manager/Spawner" to="Level Manager" method="_on_spawner_spawn_counter"]
+[connection signal="timeout" from="Level Manager/Spawner/Timer" to="Level Manager/Spawner" method="_on_timer_timeout"]
+[connection signal="body_entered" from="Level Manager/Spawner/despawner" to="Level Manager/Spawner" method="_on_despawner_body_entered"]

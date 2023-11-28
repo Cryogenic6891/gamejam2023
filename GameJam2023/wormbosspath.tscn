@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx2sleqyebbv0"]
+
+[ext_resource type="Script" path="res://wormbosspath.gd" id="1_03wcb"]
+
+[sub_resource type="Curve2D" id="Curve2D_birqu"]
+_data = {
+"points": PackedVector2Array(-25.367, -82.7349, 25.367, 82.7349, 330.917, 590.394, 0, 167.488, 0, -167.488, 397.743, 362.124, 0, 0, 0, 0, 372.758, 129.918, 18.3577, -56.5019, -18.3577, 56.5019, 323.084, 147.783, 41.3883, -6.05377, -41.3883, 6.05377, 233.389, 592.362, 23.3644, 68.6094, -23.3644, -68.6094, 149.068, 531.274, -2.33644, 163.452, 2.33644, -163.452, 111.177, 269.095, -40.387, -2.01792, 40.387, 2.01792, 155.343, 25.5228, 0, 0, 0, 0, 330.014, 590.394, 0, 0, 0, 0, 330.917, 590.394)
+}
+point_count = 10
+
+[node name="Path2D" type="Path2D"]
+position = Vector2(-319.11, 174.908)
+scale = Vector2(3.56288, 0.589322)
+curve = SubResource("Curve2D_birqu")
+script = ExtResource("1_03wcb")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(330.917, 590.394)
+rotation = 1.27329
+
+[node name="_Timer_33682" type="Timer" parent="PathFollow2D"]
+wait_time = 0.2
+one_shot = true

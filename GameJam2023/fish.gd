@@ -26,20 +26,17 @@ var fish_dict = {
 	"blue" : {"speed" : 20,"points" : 1.5,"dmg" : 0.25,"scale" : 2}
 }
 
-func _ready():
+func spawn(colors = ["purple", "red", "blue"]):
 	starting_dirt = dirt
 	anim_clean.play("swim")
 	anim_dirt.play("swim")
-	if random_fish == true:
-		fish_color = fish_color.pick_random()
-	else:
-		fish_color = "purple"
-	var fish_stats = fish_dict[fish_color]
+	colors = colors.pick_random()
+	var fish_stats = fish_dict[colors]
 	speed = fish_stats["speed"]
 	points_per_dirt = fish_stats["points"]
 	hp_multiplyer = fish_stats["dmg"]
 	scale = scale * fish_stats["scale"]
-	sprite.texture = Sprites.fish_sprites[fish_color]
+	sprite.texture = Sprites.fish_sprites[colors]
 
 func _physics_process(delta):
 	velocity.x = speed
@@ -50,6 +47,10 @@ func _process(_delta):
 
 func hit(cleaned):
 	dirt -= int(round(cleaned * hp_multiplyer))
+	if dirt >= 250:
+		dirt = 250
+	if dirt > 0:
+		$sparkle.emitting = false
 	if dirt < 0:
 		dirt = 0
 		$sparkle.emitting = true
