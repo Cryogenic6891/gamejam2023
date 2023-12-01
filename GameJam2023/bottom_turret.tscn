@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ctjavv7x5e6vi"]
+[gd_scene load_steps=7 format=3 uid="uid://ctjavv7x5e6vi"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_ij4ct"]
 [ext_resource type="Texture2D" uid="uid://bspomhdk8nbdl" path="res://assets/tanks_tankGreen_body3.png" id="2_kgbty"]
 [ext_resource type="Texture2D" uid="uid://cww10am0itlxh" path="res://assets/tanks_turret1.png" id="3_5farl"]
 [ext_resource type="Script" path="res://barrel.gd" id="4_8lbrm"]
+[ext_resource type="AudioStream" uid="uid://cobhp3yxal8eb" path="res://sounds/SE Turret Shot.wav" id="5_7gxt0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_knonj"]
 radius = 21.2132
@@ -37,6 +38,10 @@ one_shot = true
 
 [node name="power_timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_7gxt0")
+volume_db = -6.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="power_timer" to="." method="_on_power_timer_timeout"]

@@ -45,7 +45,7 @@ func _on_area_2d_body_shape_entered(body_rid, body, body_shape_index, local_shap
 		get_parent().add_child(add_splash)
 		add_splash.global_position = self.global_position
 		if self.is_in_group("oil"):
-			body.hit(-Main.ball_power)
+			body.hit(-30)
 		else:
 			body.hit(Main.ball_power)
 		if ricochet == true:

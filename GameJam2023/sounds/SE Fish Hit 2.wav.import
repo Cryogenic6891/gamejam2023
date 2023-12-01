@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cdssofbfgomg2"
+path="res://.godot/imported/SE Fish Hit 2.wav-0c3c5c1846f70b832c17b823a121dc09.sample"
+
+[deps]
+
+source_file="res://sounds/SE Fish Hit 2.wav"
+dest_files=["res://.godot/imported/SE Fish Hit 2.wav-0c3c5c1846f70b832c17b823a121dc09.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

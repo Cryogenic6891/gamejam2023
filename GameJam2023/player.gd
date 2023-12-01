@@ -3,6 +3,7 @@ extends CharacterBody2D
 var water_jet = preload("res://water_jet.tscn")
 @onready var cooldown_timer = $Timer
 @onready var power_timer = $power_timer
+@onready var SE = $AudioStreamPlayer
 var power_length = 10
 var jet_speed = 2
 var shoot_cooldown = false
@@ -22,6 +23,8 @@ func _physics_process(delta):
 	player_movement(delta)
 	if Input.is_action_pressed("shoot") and shoot_cooldown == false:
 		fire_jet()
+		SE.play()
+		
 
 func get_input():
 	if self.name == "bottomTurret":

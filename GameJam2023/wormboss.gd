@@ -8,7 +8,7 @@ var jet_speed = 2
 var shoot_cooldown = false
 @export var point_follow : Path2D
 
-var hp = 150
+var hp = 105
 @onready var damage_timer = $Timer2
 
 var max_speed = 400
@@ -66,7 +66,8 @@ func hit(_x):
 	damage_timer.start(0.1)
 	modulate = Color.RED
 	if hp == 0:
-		get_tree().quit()
+		self.queue_free()
+		_physics_process(false)
 
 func powerup(type,node):
 	if type == "triple":

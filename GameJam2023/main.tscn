@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://drvfhvuv4oovd"]
+[gd_scene load_steps=12 format=3 uid="uid://drvfhvuv4oovd"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_6qtrp"]
 [ext_resource type="Script" path="res://Spawner.gd" id="1_h4oga"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ctjavv7x5e6vi" path="res://bottom_turret.tscn" id="4_jutxs"]
 [ext_resource type="PackedScene" uid="uid://cekcjwgwfpb57" path="res://top_turret.tscn" id="5_giaak"]
 [ext_resource type="Script" path="res://Level Manager.gd" id="8_an7t7"]
+[ext_resource type="AudioStream" uid="uid://3y0l721xfyjd" path="res://sounds/Ambient Water Noises.wav" id="9_qdg4h"]
 [ext_resource type="PackedScene" uid="uid://dx2sleqyebbv0" path="res://wormbosspath.tscn" id="11_jwl51"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5c0d"]
@@ -240,6 +241,13 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level Manager/Spawner/despawner"]
 position = Vector2(1270, 327)
 shape = SubResource("RectangleShape2D_r5c0d")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Level Manager"]
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="Level Manager"]
+stream = ExtResource("9_qdg4h")
+autoplay = true
 
 [node name="Path2D" parent="." groups=["path"] instance=ExtResource("11_jwl51")]
 position = Vector2(-340.11, 172.908)

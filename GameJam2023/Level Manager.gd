@@ -1,6 +1,12 @@
 extends Node2D
 
 @onready var spawner = $Spawner
+@onready var jukebox = $AudioStreamPlayer
+@onready var background = $AudioStreamPlayer2
+
+var main_theme = preload("res://sounds/Main Theme.wav")
+var boss_theme = preload("res://sounds/Boss Battle.wav")
+var end_credits = preload("res://sounds/End Credits.wav")
 
 var boss = preload("res://wormboss.tscn")
 var thorax = preload("res://thorax.tscn")
@@ -13,6 +19,11 @@ var boss_end = false
 
 var spawn_counter = 0
 
+func _ready():
+	jukebox.stream = main_theme
+	background.playing = true
+	jukebox.playing = true
+	
 func _process(delta):
 	level1()
 
@@ -44,18 +55,17 @@ func level1():
 		spawner.spawn_color = ["blue"]
 	if spawn_counter >= 100:
 		spawner.spawn_color = ["red"]
-		spawner.spawn_rate = 0.5
+		spawner.spawn_rate = 0.75
 	if spawn_counter == 120:
 		spawner.spawn_color = ["blue"]
-	if spawn_counter == 150:
-		spawner.spawn_color = ["blue"]
-	if spawn_counter == 170:
+	if spawn_counter == 130:
 		if boss_end == false:
+			jukebox.stream = boss_theme
+			jukebox.play()
 			spawn_boss()
 
 func _on_spawner_spawn_counter():
 	spawn_counter += 1
-	print(spawn_counter)
 
 func spawn_boss():
 	var spawn = boss.instantiate()

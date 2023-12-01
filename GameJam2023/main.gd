@@ -3,7 +3,7 @@ extends Node2D
 var total_points = 0
 var combo = 1
 var combo_max = 5
-var dirt_max = 1200
+var dirt_max = 2500
 var dirt_current = 0
 
 var size_cost = 10
@@ -30,7 +30,7 @@ func _process(delta):
 	if combo > 5:
 		combo = 5
 	if dirt_current >= dirt_max:
-		get_tree().reload_current_scene()
+		pass
 
 func update_points(points):
 	total_points += points
